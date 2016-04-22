@@ -13,8 +13,7 @@ public class HighScore1 {
                                     yc.getInputStream()));
         String inputLine = in.readLine();
         while ((inputLine = in.readLine()) != null && inputLine.length()>=1){
-            System.out.println(inputLine.substring(inputLine.indexOf(",", inputLine.indexOf(",")+1)+1, inputLine.length()));
-            addElement(scores, inputLine.substring(inputLine.indexOf(",", inputLine.indexOf(",")+1)+1, inputLine.length()));
+            scores = addElement(scores, inputLine.substring(inputLine.indexOf(",", inputLine.indexOf(",")+1)+1, inputLine.length()));
         }
         in.close();
 		return scores;
