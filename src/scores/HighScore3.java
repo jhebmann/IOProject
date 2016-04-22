@@ -5,7 +5,7 @@ import java.net.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class HighScore2 {
+public class HighScore3 {
 	public static String[] getScores() throws Exception{
 		String[] scores = {};
 		URL url = new URL("https://api.thingspeak.com/channels/109947/feeds.csv");
@@ -50,5 +50,10 @@ public class HighScore2 {
 	    	return top10;
 	    }
 		return allBest;
+	}
+	
+	public static void sendScore(BestPlayer p) throws Exception{
+		URL url = new URL("https://api.thingspeak.com/update?api_key=49TO83CXMGCSRYUU&field1="+p.getScore()+"&field2="+p.getPlayer());
+        url.openConnection().getInputStream();
 	}
 }

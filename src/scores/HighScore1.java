@@ -7,8 +7,8 @@ import java.util.Arrays;
 public class HighScore1 {
 	public static String[] getScores() throws Exception{
 		String[] scores = {};
-		URL oracle = new URL("https://api.thingspeak.com/channels/109947/feeds.csv");
-        URLConnection yc = oracle.openConnection();
+		URL url = new URL("https://api.thingspeak.com/channels/109947/feeds.csv");
+        URLConnection yc = url.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(
                                     yc.getInputStream()));
         String inputLine = in.readLine();

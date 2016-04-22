@@ -19,11 +19,11 @@ public class TestHighScore {
 		//Step 1-2
 		File file = new File("lib/scoreSamples.txt");
 		int ligne = ThreadLocalRandom.current().nextInt(1, 11);
+		int result = 0;
 		try {
 			Scanner score = new Scanner(file);
-			String result = "";
 			for (int i = 0 ; i< ligne ; i++)
-				result = score.nextLine();
+				result = score.nextInt();
 			System.out.println("Your score is : " + result);
 			score.close();
 		} catch (Exception e) {
@@ -41,17 +41,44 @@ public class TestHighScore {
 			e.printStackTrace();
 		}
 		
+		
 		System.out.println("\n\nStep 2\n");
 		
 		//Step 2
 		System.out.println("Best scores are :");
+		String[] scores = {};
+		BestPlayer[] top10 = {};
 		try{
-			String[] scores = HighScore2.getScores();
-			BestPlayer[] top10 = HighScore2.tenBestScores(scores);
+			scores = HighScore2.getScores();
+			top10 = HighScore2.tenBestScores(scores);
 			for (int i = 0 ; i < top10.length ; i++)
 				System.out.println("Score of "+top10[i].getPlayer()+" : "+top10[i].getScore());
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+		
+		
+		System.out.println("\n\nStep 3\n");
+		
+		//Step 3
+		if (top10.length < 10 || result > top10[9].getScore()){
+			System.out.println("Your score was among the 10 best ! Congratulations !");
+			try{
+				HighScore3.sendScore(new BestPlayer(name, result));
+				System.out.println("The 10 best scores now are :");
+				try{
+					scores = HighScore3.getScores();
+					top10 = HighScore3.tenBestScores(scores);
+					for (int i = 0 ; i < top10.length ; i++)
+						System.out.println("Score of "+top10[i].getPlayer()+" : "+top10[i].getScore());
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Your score wasn't among the 10 best ! Try again !");
 		}
 	}
 }
