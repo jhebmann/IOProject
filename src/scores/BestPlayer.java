@@ -14,16 +14,34 @@ public class BestPlayer {
 		this.score = s;
 	}
 	
+	/**
+        * Returns the player.
+        * @return player
+        */
 	public String getPlayer() {
 		return player;
 	}
+	
+	/**
+ 	* Sets the player
+ 	* @param player the player to set
+ 	*/
 	public void setPlayer(String player) {
 		this.player = player;
 	}
 	
+	/**
+ 	* Returns the score.
+ 	* @return score
+ 	*/
 	public int getScore() {
 		return score;
 	}
+	
+	/**
+ 	* Sets the score
+ 	* @param score the score to set
+ 	*/
 	public void setScore(int score) {
 		this.score = score;
 	}
