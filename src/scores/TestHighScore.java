@@ -1,10 +1,14 @@
 package scores;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ *	A class which run tests on the 3 first steps
+ * 
+ * @author birzaneanu, hebmann
+ */
 public class TestHighScore {
 
 	public static void main(String[] args) {

@@ -5,7 +5,17 @@ import java.net.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * A class which represents a highscore (Step 3)
+ * 
+ * @author  birzaneanu, hebmann
+ */
 public class HighScore3 {
+	/**
+	 * Gets scores from ThingSpeak
+	 * @return All scores stored online
+	 * @throws Exception If there are connection problems
+	 */
 	public static String[] getScores() throws Exception{
 		String[] scores = {};
 		URL url = new URL("https://api.thingspeak.com/channels/109947/feeds.csv");
@@ -19,19 +29,36 @@ public class HighScore3 {
         in.close();
 		return scores;
 	}
-	
-	static String[] addElement(String[] a, String e) {
+
+	/**
+	 * Adds a String to a String Array
+	 * @param a The String Array in which the String will be added
+	 * @param e The String that will be added in the Array
+	 * @return The new Array
+	 */
+	private static String[] addElement(String[] a, String e) {
 		a  = Arrays.copyOf(a, a.length + 1);
 		a[a.length - 1] = e;
 		return a;
 	}
-	
-	static BestPlayer[] addElement(BestPlayer[] a, BestPlayer e) {
+
+	/**
+	 * Adds a BestPlayer to a BestPlayer Array
+	 * @param a The BestPlayer Array in which the BestPlayer will be added
+	 * @param e The BestPlayer that will be added in the BestPlayer Array
+	 * @return The new BestPlayer Array
+	 */
+	private static BestPlayer[] addElement(BestPlayer[] a, BestPlayer e) {
 		a  = Arrays.copyOf(a, a.length + 1);
 		a[a.length - 1] = e;
 		return a;
 	}
-	
+
+	/**
+	 * Get the 10 best scores from all scores
+	 * @param readScores The scores read online
+	 * @return The 10 best scores or all scores if there are less than 10 of them
+	 */
 	public static BestPlayer[] tenBestScores(String[] readScores){
 		BestPlayer[] allBest = {};
 		for (int i = 0 ; i< readScores.length ; i++){
@@ -52,6 +79,11 @@ public class HighScore3 {
 		return allBest;
 	}
 	
+	/**
+	 * Sends a score online
+	 * @param p A BestPlayer (with name and score)
+	 * @throws Exception If there are connection problems
+	 */
 	public static void sendScore(BestPlayer p) throws Exception{
 		URL url = new URL("https://api.thingspeak.com/update?api_key=49TO83CXMGCSRYUU&field1="+p.getScore()+"&field2="+p.getPlayer());
         url.openConnection().getInputStream();

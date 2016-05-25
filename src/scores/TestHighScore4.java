@@ -1,10 +1,14 @@
 package scores;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ *	A class which run tests on the fourth step
+ * 
+ * @author birzaneanu, hebmann
+ */
 public class TestHighScore4 {
 
 	public static void main(String[] args) {
@@ -18,6 +22,7 @@ public class TestHighScore4 {
 		BestPlayer[] top10 = {};
 
 		do {
+			//First thing in loop : we get online scores
 			System.out.println("Best scores are :");
 			try {
 				scores = HighScore2.getScores();
@@ -28,6 +33,7 @@ public class TestHighScore4 {
 				e.printStackTrace();
 			}
 
+			//Then, we ask if the player wanna start/restart
 			System.out.println("Do you want to (re)start ? (Y/N)");
 			String restart = "";
 			restart = keyboard.nextLine();
@@ -36,6 +42,7 @@ public class TestHighScore4 {
 			}
 
 			if (!stop){
+				//If he restarts, we get a random score from the file
 				File file = new File("lib/scoreSamples.txt");
 				int ligne = ThreadLocalRandom.current().nextInt(1, 11);
 				int result = 0;
@@ -50,6 +57,7 @@ public class TestHighScore4 {
 				}
 
 				if (top10.length < 10 || result > top10[9].getScore()) {
+					//If the score is among the 10 best scores, we send it online
 					System.out.println("Your score was among the 10 best ! Congratulations !");
 					try {
 						HighScore3.sendScore(new BestPlayer(name, result));
@@ -71,5 +79,6 @@ public class TestHighScore4 {
 				}
 			}
 		} while (!stop);
+		keyboard.close();
 	}
 }
